@@ -1,8 +1,10 @@
 # Inter-City Freight Load Matching Marketplace
 
-**PES University — Dept. of CSE**  
+**NAME: SHRUTI CHOUDHARY
+SRN: PES1UG24AM271**  
 **Lab 1: Requirements Engineering & UML Use-Case Modelling**  
 **Problem Statement #28: Smart Cities, Transport & Logistics**
+
 
 ## Project Overview
 

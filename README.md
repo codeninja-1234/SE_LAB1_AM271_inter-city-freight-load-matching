@@ -60,14 +60,5 @@ The system is a B2B freight brokerage exchange where commercial shippers post ca
 - Submit Proof of Delivery `«include»` Verify Proof of Delivery
 - Verify Proof of Delivery `«include»` Release Escrow Payment
 
-## Repository Structure
-
-```text
-Problem-28-Freight-Matching/
-├── README.md
-├── Requirements_Table.pdf
-├── Use_Case_Diagram.pdf
-└── Use_Case_Flow.pdf
-```
 
 

@@ -7,65 +7,21 @@ STEP = 20
 THRUST, ROTATE_SPEED, BURN_RATE, FUEL_MAX = 60.0, 2.4, 22.0, 300.0
 MAX_SPEED_X, MAX_SPEED_Y, MAX_ANGLE = 25.0, 40.0, 0.25
 FOOT = 12
-LAST_LANDING_POS = None
-FIREWORKS = []
 
 
 def ship_color(fuel_ratio):
     """Return an (r, g, b) hull colour for the given fuel ratio (1.0 = full), or None for the default."""
-    ratio = max(0.0, min(1.0, fuel_ratio))
-    if ratio > 0.6:
-        return (80, 220, 90)
-    if ratio > 0.2:
-        return (220, 200, 50)
-    return (220, 70, 70)
-
-
-def _spawn_fireworks(pos):
-    colors = [(255, 80, 80), (90, 200, 255), (255, 220, 90), (150, 255, 120), (255, 150, 240)]
-    for _ in range(36):
-        angle = random.uniform(0, math.tau)
-        speed = random.uniform(35, 180)
-        FIREWORKS.append({
-            "x": pos.x,
-            "y": pos.y,
-            "vx": math.cos(angle) * speed,
-            "vy": math.sin(angle) * speed - 30,
-            "life": random.uniform(0.5, 1.1),
-            "max_life": random.uniform(0.5, 1.1),
-            "color": random.choice(colors),
-            "radius": random.uniform(2, 5),
-        })
-
-
-def _update_fireworks(dt):
-    for particle in FIREWORKS[:]:
-        particle["x"] += particle["vx"] * dt
-        particle["y"] += particle["vy"] * dt
-        particle["vy"] += 180 * dt
-        particle["life"] -= dt
-        if particle["life"] <= 0:
-            FIREWORKS.remove(particle)
-
-
-def _draw_fireworks(screen):
-    for particle in FIREWORKS:
-        alpha = max(0.0, min(1.0, particle["life"] / particle["max_life"]))
-        color = tuple(max(0, min(255, int(c * alpha))) for c in particle["color"])
-        pygame.draw.circle(screen, color, (int(particle["x"]), int(particle["y"])), max(1, int(particle["radius"] * alpha)))
+    pass
 
 
 def on_landing(score):
     """Called after a successful landing with the points just earned; add fireworks or bonuses here."""
-    global LAST_LANDING_POS
-    pos = LAST_LANDING_POS if LAST_LANDING_POS is not None else pygame.Vector2(WIDTH / 2, HEIGHT / 3)
-    _spawn_fireworks(pos)
-    LAST_LANDING_POS = None
+    pass
 
 
 def bonus_life_threshold():
     """Return a score value at which the player earns an extra life, or None to disable bonus lives."""
-    return 1500
+    pass
 
 
 def make_terrain():
@@ -116,7 +72,6 @@ class Game:
         return None
 
     def touchdown(self):
-        global LAST_LANDING_POS
         pad = self.pad_under()
         angle = wrap_angle(self.angle)
         ok_x = abs(self.vel.x) <= MAX_SPEED_X
@@ -126,7 +81,6 @@ class Game:
             earned = int((100 + self.fuel) * pad[3])
             self.score += earned
             self.state, self.message = "landed", f"Perfect landing! +{earned}  (Space = next level)"
-            LAST_LANDING_POS = self.pos.copy()
             on_landing(earned)
             return
         self.lives -= 1
@@ -140,7 +94,6 @@ class Game:
         self.message = f"Crashed: {reason}!  " + ("Space = retry" if self.lives > 0 else "Game over - R = restart")
 
     def update(self, dt, keys):
-        _update_fireworks(dt)
         if self.state != "fly":
             return
         threshold = bonus_life_threshold()
@@ -186,7 +139,6 @@ class Game:
             pygame.draw.polygon(screen, color, self.ship_points())
         else:
             pygame.draw.circle(screen, (255, 120, 40), self.pos, 24, 3)
-        _draw_fireworks(screen)
         ok_x = abs(self.vel.x) <= MAX_SPEED_X
         ok_y = abs(self.vel.y) <= MAX_SPEED_Y
         ok_a = abs(wrap_angle(self.angle)) <= MAX_ANGLE

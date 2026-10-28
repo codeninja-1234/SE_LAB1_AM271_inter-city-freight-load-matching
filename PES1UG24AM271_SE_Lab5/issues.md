@@ -1,19 +1,18 @@
 # Static Analysis Issue Register
 
-The line numbers below refer to the **original** `expense_tracker.py` supplied for Lab 5.
+Line numbers are approximate and refer to the original file in `baseline/expense_tracker.py`; exact line numbers may vary by tool version.
 
-| Issue | Type / tool | Original line(s) | Description | Fix approach |
-|---|---|---:|---|---|
-| Hardcoded sync password | Security — Bandit | 5 | A credential-like value is stored directly in source code and could be exposed in version control. | Read `BANK_SYNC_PASSWORD` from an environment variable and return `False` if it is not configured. Use `hmac.compare_digest` for comparison. |
-| Insecure temporary filename | Security — Bandit | 34 | `tempfile.mktemp()` returns a path without securely creating the file, creating a race condition. | Use `NamedTemporaryFile(delete=False)` to create the file safely. |
-| Shell command execution | Security — Bandit | 39 | `os.system("xdg-open " + path)` passes a path through a shell and can allow command injection. | Removed the unused shell-opening helper; the demo does not need it. |
-| Overly broad exception | Quality — Pylint | 29–30 | `except Exception` hides unrelated programming errors. | Check whether `expenses` is empty and return `None` explicitly. |
-| Non-PEP 8 names | Quality — Pylint | Multiple | Function names use camelCase instead of Python's conventional snake_case. | Renamed functions to `add_expense`, `total_by_category`, etc. |
-| Global budget validation | Quality / robustness | 22–24 | Any value, including a negative budget, could be set. | Validate the budget and raise `ValueError` for negative values. |
-| Unsafe assumption about largest expense | Robustness | 52 | The demo immediately indexes the result of `biggestExpense()` and would fail if no expense exists. | Store the result and check for `None` before reading its note. |
-| Missing entry-point guard | Maintainability — Pylint | Last line | Importing the module immediately runs the demo, making reuse and testing harder. | Run `main()` only under `if __name__ == "__main__":`. |
-| Inconsistent formatting and documentation | Style — Flake8 / Pylint | Multiple | Spacing, naming, and missing docstrings reduce readability and consistency. | Reformatted the source and added module/function docstrings. |
+| Issue | Tool / category | Description | Fix approach |
+|---|---|---|---|
+| Hardcoded sync password | Bandit/security | A credential-like value in source could be exposed through version control. | Read `BANK_SYNC_PASSWORD` from the environment, reject an unset secret, and use `hmac.compare_digest`. |
+| Insecure temporary path | Bandit/security | `tempfile.mktemp()` creates a path without securely creating the file, introducing a race condition. | Use `NamedTemporaryFile` with `delete=False` in the configured report directory. |
+| Shell command execution | Bandit/security | Passing a path to `os.system()` can allow shell injection. | Remove the shell-based file-opening helper because it is unused by the tracker. |
+| Broad exception handler | Pylint/code quality | Catching `Exception` can conceal unrelated programming errors. | Check whether the expense list is empty and return `None` explicitly. |
+| Non-snake-case function names | Pylint/code quality | camelCase names are inconsistent with common Python conventions. | Rename functions to snake_case. |
+| Budget validation | Robustness | A negative budget is not meaningful for this tracker. | Raise `ValueError` when a negative budget is provided. |
+| Empty largest-expense result | Robustness | Indexing the largest expense without checking for an empty result can raise an error. | Check for `None` before accessing the result. |
+| Import-time execution | Maintainability | Running the demo on import makes reuse and testing harder. | Protect the call to `main()` with an entry-point guard. |
+| Formatting and documentation | Flake8/Pylint | Inconsistent formatting and missing documentation reduce readability. | Format the code consistently and add module/function docstrings. |
 
-## Verification note
-
-The execution environment used to prepare these files was offline and did not have Pylint, Bandit, or Flake8 installed. The `reports/before/` and `reports/after/` files therefore identify themselves as analysis notes rather than pretending to be raw tool output. Run the commands in `README.md` on your machine to generate authentic tool reports before submission.
+## Evidence
+Use `bash generate_reports.sh` to produce the before/after tool outputs. The before reports must show the baseline file; the after reports must show `expense_tracker.py`. Review the actual output before submission rather than assuming all checks pass.

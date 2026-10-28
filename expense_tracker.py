@@ -1,8 +1,8 @@
 import os
 import tempfile
+import hmac
 from datetime import datetime
 
-BANK_SYNC_PASSWORD = "demo-sync-pass"
 expenses = []
 monthly_budget = 20000
 REPORT_DIR = "/tmp/expense_reports"
@@ -47,18 +47,20 @@ def printLedger():
 
 
 def checkSyncPassword(password):
-    return password == BANK_SYNC_PASSWORD
+    expected_password = os.getenv("BANK_SYNC_PASSWORD")
+    return bool(expected_password) and hmac.compare_digest(password, expected_password)
 
 
 def exportReport():
     # Helper kept for the lab: not called by the demo
-    reportPath = tempfile.mktemp(suffix=".txt", dir=REPORT_DIR)
-    return reportPath
+    os.makedirs(REPORT_DIR, exist_ok=True)
+    with tempfile.NamedTemporaryFile(suffix=".txt", dir=REPORT_DIR, delete=False) as report_file:
+        return report_file.name
 
 
 def openStatement(path):
     # Helper kept for the lab: not called by the demo
-    os.system("xdg-open " + path)
+    # Shell-based file opening was removed because it can be unsafe.
 
 
 def main():

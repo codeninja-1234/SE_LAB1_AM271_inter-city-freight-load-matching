@@ -1,10 +1,31 @@
-BASELINE REPORT — Pylint
-Note: Pylint could not be executed in the provided offline environment because the package is not installed and package downloads are unavailable. This is a manual baseline of findings from expense_tracker.py, not raw Pylint output.
+************* Module expense_tracker_before
+/tmp/expense_tracker_before.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+/tmp/expense_tracker_before.py:7:0: C0103: Constant name "monthly_budget" doesn't conform to UPPER_CASE naming style (invalid-name)
+/tmp/expense_tracker_before.py:11:0: C0116: Missing function or method docstring (missing-function-docstring)
+/tmp/expense_tracker_before.py:11:0: C0103: Function name "addExpense" doesn't conform to snake_case naming style (invalid-name)
+/tmp/expense_tracker_before.py:20:0: C0116: Missing function or method docstring (missing-function-docstring)
+/tmp/expense_tracker_before.py:20:0: C0103: Function name "totalByCategory" doesn't conform to snake_case naming style (invalid-name)
+/tmp/expense_tracker_before.py:28:0: C0116: Missing function or method docstring (missing-function-docstring)
+/tmp/expense_tracker_before.py:28:0: C0103: Function name "setBudget" doesn't conform to snake_case naming style (invalid-name)
+/tmp/expense_tracker_before.py:28:14: C0103: Argument name "newBudget" doesn't conform to snake_case naming style (invalid-name)
+/tmp/expense_tracker_before.py:29:4: W0603: Using the global statement (global-statement)
+/tmp/expense_tracker_before.py:33:0: C0116: Missing function or method docstring (missing-function-docstring)
+/tmp/expense_tracker_before.py:33:0: C0103: Function name "remainingBudget" doesn't conform to snake_case naming style (invalid-name)
+/tmp/expense_tracker_before.py:38:0: C0116: Missing function or method docstring (missing-function-docstring)
+/tmp/expense_tracker_before.py:38:0: C0103: Function name "biggestExpense" doesn't conform to snake_case naming style (invalid-name)
+/tmp/expense_tracker_before.py:41:11: W0718: Catching too general exception Exception (broad-exception-caught)
+/tmp/expense_tracker_before.py:44:0: C0116: Missing function or method docstring (missing-function-docstring)
+/tmp/expense_tracker_before.py:44:0: C0103: Function name "printLedger" doesn't conform to snake_case naming style (invalid-name)
+/tmp/expense_tracker_before.py:45:4: C0200: Consider using enumerate instead of iterating with range and len (consider-using-enumerate)
+/tmp/expense_tracker_before.py:49:0: C0116: Missing function or method docstring (missing-function-docstring)
+/tmp/expense_tracker_before.py:49:0: C0103: Function name "checkSyncPassword" doesn't conform to snake_case naming style (invalid-name)
+/tmp/expense_tracker_before.py:53:0: C0116: Missing function or method docstring (missing-function-docstring)
+/tmp/expense_tracker_before.py:53:0: C0103: Function name "exportReport" doesn't conform to snake_case naming style (invalid-name)
+/tmp/expense_tracker_before.py:55:4: C0103: Variable name "reportPath" doesn't conform to snake_case naming style (invalid-name)
+/tmp/expense_tracker_before.py:59:0: C0116: Missing function or method docstring (missing-function-docstring)
+/tmp/expense_tracker_before.py:59:0: C0103: Function name "openStatement" doesn't conform to snake_case naming style (invalid-name)
+/tmp/expense_tracker_before.py:64:0: C0116: Missing function or method docstring (missing-function-docstring)
 
-Likely findings:
-- C naming-style violations: addExpense, totalByCategory, setBudget, remainingBudget, biggestExpense, printLedger, checkSyncPassword, exportReport, openStatement.
-- W broad-exception-caught: biggestExpense catches Exception.
-- W unused-import / unused-variable style findings may vary by Pylint version.
-- W global-statement: setBudget modifies monthly_budget globally.
-- C missing module/function docstrings.
-- C wrong-import-order / formatting issues may vary by version.
+-----------------------------------
+Your code has been rated at 5.27/10
+

@@ -1,8 +1,4 @@
-BASELINE REPORT — Flake8
-Note: Flake8 could not be executed in the provided offline environment because the package is not installed and package downloads are unavailable. This is a manual baseline of style findings from expense_tracker.py, not raw Flake8 output.
-
-Visible issues:
-- E128 / E501-style continuation or line-length violations may be reported depending on exact line lengths.
-- E303: too many blank lines / inconsistent spacing may be reported.
-- E701/E305 and other style checks may vary by version.
-- Function and variable names do not follow snake_case (Pycodestyle itself does not enforce naming).
+/tmp/expense_tracker_before.py:15:30: E203 whitespace before ':'
+/tmp/expense_tracker_before.py:44:1: E302 expected 2 blank lines, found 1
+/tmp/expense_tracker_before.py:74:50: E261 at least two spaces before inline comment
+/tmp/expense_tracker_before.py:77:80: E501 line too long (93 > 79 characters)

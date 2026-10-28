@@ -1,0 +1,4 @@
+AFTER REPORT STATUS
+Flake8 was not executable in the offline preparation environment (not installed; package index unavailable). Run:
+python -m flake8 expense_tracker.py
+Review any remaining findings in the actual output locally.

@@ -1,0 +1,4 @@
+AFTER REPORT STATUS
+Pylint was not executable in the offline preparation environment (not installed; package index unavailable). Run:
+python -m pylint expense_tracker.py
+Target from handout: score above 9.5. Check the actual output locally.

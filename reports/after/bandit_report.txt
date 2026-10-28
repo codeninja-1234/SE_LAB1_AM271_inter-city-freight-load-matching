@@ -1,0 +1,4 @@
+AFTER REPORT STATUS
+Bandit was not executable in the offline preparation environment (not installed; package index unavailable). Run:
+python -m bandit -r expense_tracker.py
+Review any remaining findings in the actual output locally.

@@ -1,0 +1,8 @@
+BASELINE REPORT — Flake8
+Note: Flake8 could not be executed in the provided offline environment because the package is not installed and package downloads are unavailable. This is a manual baseline of style findings from expense_tracker.py, not raw Flake8 output.
+
+Visible issues:
+- E128 / E501-style continuation or line-length violations may be reported depending on exact line lengths.
+- E303: too many blank lines / inconsistent spacing may be reported.
+- E701/E305 and other style checks may vary by version.
+- Function and variable names do not follow snake_case (Pycodestyle itself does not enforce naming).

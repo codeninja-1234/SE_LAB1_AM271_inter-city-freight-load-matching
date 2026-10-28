@@ -50,6 +50,7 @@ def set_budget(new_budget: float) -> None:
 
     budget_state["monthly"] = new_budget
 
+
 def remaining_budget() -> float:
     """Return the budget left after recorded expenses."""
     spent = sum(float(expense["amount"]) for expense in expenses)

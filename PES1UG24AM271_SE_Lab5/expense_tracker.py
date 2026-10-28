@@ -10,9 +10,14 @@ from tempfile import NamedTemporaryFile
 from typing import Any
 
 DEFAULT_MONTHLY_BUDGET = 20_000.0
-REPORT_DIR = Path(os.getenv("EXPENSE_REPORT_DIR", "/tmp/expense_reports"))
+REPORT_DIR = Path(
+    os.getenv(
+        "EXPENSE_REPORT_DIR",
+        str(Path.home() / ".local" / "share" / "expense_tracker" / "reports"),
+    )
+)
 expenses: list[dict[str, Any]] = []
-monthly_budget = DEFAULT_MONTHLY_BUDGET
+budget_state = {"monthly_budget": DEFAULT_MONTHLY_BUDGET}
 
 
 def add_expense(amount: float, category: str = "Misc", note: str = "") -> bool:
@@ -46,14 +51,13 @@ def set_budget(new_budget: float) -> None:
     if new_budget < 0:
         raise ValueError("Budget cannot be negative.")
 
-    global monthly_budget
-    monthly_budget = new_budget
+    budget_state["monthly_budget"] = new_budget
 
 
 def remaining_budget() -> float:
     """Return the budget left after recorded expenses."""
     spent = sum(float(expense["amount"]) for expense in expenses)
-    return monthly_budget - spent
+    return budget_state["monthly_budget"] - spent
 
 
 def biggest_expense() -> dict[str, Any] | None:
@@ -111,7 +115,7 @@ def main() -> None:
         "Summary:",
         len(expenses),
         "expenses recorded against a budget of",
-        monthly_budget,
+        budget_state["monthly_budget"],
     )
 
 

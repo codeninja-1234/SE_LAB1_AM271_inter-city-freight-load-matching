@@ -16,5 +16,3 @@ I moved the sync password out of the source file and into an environment variabl
 
 I think static analysis tools are most useful when I understand each finding and decide how to address it rather than changing code blindly. After making a fix, I should rerun the tools and inspect the output. Static analysis supports testing and code review, but it cannot prove that a program is completely secure or free of bugs.
 
-### Verification
-After running `bash generate_reports.sh`, compare the before and after reports. Record the actual Pylint score and verify the remaining Bandit and Flake8 findings before claiming the checks passed.

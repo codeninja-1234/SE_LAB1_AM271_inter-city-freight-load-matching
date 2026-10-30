@@ -14,5 +14,3 @@ Line numbers are approximate and refer to the original file in `baseline/expense
 | Import-time execution | Maintainability | Running the demo on import makes reuse and testing harder. | Protect the call to `main()` with an entry-point guard. |
 | Formatting and documentation | Flake8/Pylint | Inconsistent formatting and missing documentation reduce readability. | Format the code consistently and add module/function docstrings. |
 
-## Evidence
-Use `bash generate_reports.sh` to produce the before/after tool outputs. The before reports must show the baseline file; the after reports must show `expense_tracker.py`. Review the actual output before submission rather than assuming all checks pass.

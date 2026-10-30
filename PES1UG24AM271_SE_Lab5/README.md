@@ -32,5 +32,4 @@ The report script runs each tool against the baseline source and the final sourc
 - Shell-based file opening was removed.
 - Negative budgets are rejected and the empty-expense case is handled explicitly.
 
-## Important
-Do not describe reports as tool-generated until `generate_reports.sh` has run successfully on your machine. Tool versions can change exact output and line numbers.
+
